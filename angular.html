@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+        <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+        <script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+</head>
+<body ng-app="myApp">
+  <div >
+    <food apple orange banana>食物1</food>
+    <food apple orange>食物2</food>
+  </div>
+  <script>
+      angular.module('myApp',['ngRoute'])
+      .directive('food',function(){
+        return{
+          restrict:'E',
+          scope:{},
+          controller:function($scope){
+            $scope.foods = [];
+            this.addApple = function(){
+              $scope.foods.push('apple');
+            }
+            this.addOrange = function(){
+              $scope.foods.push('orange');
+            }
+            this.addBanana = function(){
+              $scope.foods.push('banana');
+            }
+          },
+          link:function(scope,element,attrs){
+            element.bind('mouseenter',function(){
+              console.log(scope.foods);
+            });
+          },
+        }
+      })
+      .directive('apple',function(){
+        return {
+          restrict:'A',
+          require:'food',
+          link:function(scope,element,attrs,foodCtrl){
+             foodCtrl.addApple();
+          }
+        }
+      })
+      .directive('orange',function(){
+        return {
+          restrict:'A',
+          require:'food',
+          link:function(scope,element,attrs,foodCtrl){
+             foodCtrl.addOrange();
+          }
+        }
+      })
+      .directive('banana',function(){
+        return {
+          restrict:'A',
+          require:'food',
+          link:function(scope,element,attrs,foodCtrl){
+             foodCtrl.addBanana();
+          }
+        }
+      })
+
+  </script>
+
+</body>
+</html>

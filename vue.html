@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+
+</head>
+<body>
+<div id="mount-point">
+<button @click="chang">66</button>
+{{msg}}
+</div>
+
+<script src="./js/vue/vue.js"></script>
+<script src="./js/vue/vue.lazyload.js"></script>
+<script src="./js/vue/vue-resource.js"></script>
+<script src="./js/vue/vue-validator.js"></script>
+<script>
+// 创建构造器
+var Profile = Vue.extend({
+  template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+  data: function () {
+    return {
+      firstName: 'Walter',
+      lastName: 'White',
+      alias: 'Heisenberg'
+    }
+  }
+})
+// 注册
+// Vue.component('my-component', Profile);
+// new Profile().$mount("#mount-point");
+
+// 创建根实例
+var vm = new Vue({
+  el: '#mount-point',
+  data:{
+    msg:{
+
+    },
+  },
+  created:function(){
+    
+  },
+  methods:{
+    chang:function(){
+       this.$set(this.msg,'','world');
+    }
+  }
+});
+</script>
+</body>
+</html>
